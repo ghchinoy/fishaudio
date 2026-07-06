@@ -1,0 +1,93 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fishaudio-cli"
+version = "0.1.0"
+requires-python = ">=3.13"
+description = "CLI tool for Fish Audio S2 Pro MLX model with YAML configuration support"
+authors = [
+    {name = "Your Name", email = "you@example.com"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["mlx", "audio", "tts", "text-to-speech", "voice-cloning", "fishaudio"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "click>=8.0.0",
+    "pyyaml>=6.0",
+    "mlx-speech",
+    "typing-extensions>=4.0.0; python_version < '3.10'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+    "mypy>=1.11.0",
+    "pytest>=8.0.0",
+    "pytest-click>=1.0.0",
+    "black>=24.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/fishaudio-cli"
+"Bug Tracker" = "https://github.com/yourusername/fishaudio-cli/issues"
+"Source Code" = "https://github.com/yourusername/fishaudio-cli"
+"Fish Audio MLX Model" = "https://huggingface.co/mlx-community/fishaudio-s2-pro-8bit-mlx"
+
+[project.scripts]
+fishaudio = "fishaudio:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.hatch.envs.test]
+requirements = [
+    "./project.optional-dependencies/dev",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long
+    "F821",  # undefined name
+]
+
+[tool.ruff.format]
+quote-style = "double"
+skip-magic-trailing-comma = true
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.poe]
+install = "uv pip install -e ."
+install-dev = "uv pip install -e .[dev]"
+format = "ruff format fishaudio.py"
+lint = "ruff check fishaudio.py"
+typecheck = "mypy fishaudio.py"
+test = "pytest"

@@ -1,0 +1,32 @@
+# Ignore large model files and generated outputs
+models/
+outputs/
+*.wav
+*.npz
+*.safetensors
+
+# Python environment
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Configuration files that should be version controlled
+!.gitignore
+!.pre-commit-config.yaml
