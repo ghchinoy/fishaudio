@@ -94,6 +94,49 @@ uv pip install click pyyaml  # Or: pip install click pyyaml
 python fishaudio.py
 ```
 
+## Configuration (YAML)
+
+You can manage your settings persistently by creating a `fishaudio.yml` configuration file in your working directory. If present, this file is loaded automatically. You can also load a custom YAML file by specifying the `--config` flag.
+
+### Format
+
+The configuration file must have a top-level `fishaudio` key containing your settings:
+
+```yaml
+fishaudio:
+  # Path to the local MLX S2 Pro model directory (Optional)
+  model_dir: "./models/fishaudio-s2-pro-8bit-mlx"
+
+  # Default directory where generated wave files are saved (Optional)
+  output_dir: "./outputs"
+
+  # Default filename for generated audio (Optional)
+  output_name: "output.wav"
+
+  # Default custom voice name from voices/ directory to clone (Optional)
+  voice: "sarah"
+
+  # Maximum number of tokens to generate [1 to 4096] (Default: 1024)
+  max_new_tokens: 1024
+
+  # Trim leading silence before saving the file (Default: false)
+  trim_leading_silence: false
+
+  # Peak amplitude normalization scale [-1.0 to 1.0, set <= 0 to disable] (Default: -1.0)
+  normalize_peak: -1.0
+
+  # Autoplay the generated WAV file using macOS afplay (Default: false)
+  play: false
+
+  # Default ad-hoc reference audio for voice cloning (Used if voice is not specified)
+  # reference_audio: "./references/sample.wav"
+  # reference_text: "Transcript of sample."
+```
+
+### CLI Precedence
+
+Command-line flags always take precedence over the settings in your configuration file. If a flag is not explicitly passed on the command line, the value from `fishaudio.yml` will be used instead.
+
 ## Usage & Examples
 
 ### 1. Basic Generation
