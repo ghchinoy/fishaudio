@@ -1,6 +1,6 @@
 # Fish Audio S2 Pro CLI - MLX Text-to-Speech Generator
 
-Generate high-quality speech synthesis using the Fish Audio S2 Pro MLX model optimized for Apple Silicon.
+Generate high-quality speech synthesis using the [Fish Audio S2 Pro](https://huggingface.co/fishaudio/s2-pro) [MLX model](https://huggingface.co/mlx-community/fishaudio-s2-pro-8bit-mlx) optimized for Apple Silicon.
 
 ## Features
 
